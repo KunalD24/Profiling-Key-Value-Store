@@ -190,20 +190,3 @@ int main(void)
         }
     }
 }
-
-// root@DESKTOP-MNOTUNE:/mnt/c/Users/Admin/Desktop/IITM/Profiling/key-value-store# sudo perf stat -e syscalls:sys_enter_read,syscalls:sys_enter_write,syscalls:sys_enter_accept ./server
-// KV server listening on /tmp/keyvaluestore.sock
-// ^C
-//  Performance counter stats for './server':        
-
-//                 26      syscalls:sys_enter_read   
-
-//                  3      syscalls:sys_enter_write  
-
-//                  3      syscalls:sys_enter_accept 
-
-
-//       22.457666428 seconds time elapsed
-
-//        0.000000000 seconds user
-//        0.150067000 seconds sys
