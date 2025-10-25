@@ -4,7 +4,7 @@ To evaluate the performance of our key-value store, we used `perf stat` to colle
 
 ## Commands Used
 
-### 1. Syscall-specific statistics for the server
+## 1. Syscall-specific statistics for the server
 ```bash
 sudo perf stat -e syscalls:sys_enter_read,syscalls:sys_enter_write,syscalls:sys_enter_accept,syscalls:sys_enter_close ./server
 ```
@@ -23,7 +23,7 @@ Performance counter stats for './server':
        0.017860000 seconds sys
 ```
 
-### Server-Side Interpretation
+## Server-Side Interpretation
 | Observation | Meaning | Inference |
 | --- | --- | --- |
 | read = 50 | The server performed 50 read operations from connected clients. | Low load; likely few requests received. |
@@ -33,8 +33,8 @@ Performance counter stats for './server':
 | Overall | Low syscall counts and high elapsed time (68s) | 	Server was mostly waiting for client requests or idle. |
 
 
-### 2. Syscall-specific statistics for the client
-### For Client1 :
+## 2. Syscall-specific statistics for the client
+## For Client1 :
 ```bash
 sudo perf stat -e syscalls:sys_enter_read,syscalls:sys_enter_write,syscalls:sys_enter_connect,syscalls:sys_enter_close ./client1
 ```
@@ -52,7 +52,7 @@ Performance counter stats for './client1':
        0.005024000 seconds user
        0.005024000 seconds sys
 ```
-### Client-Side Interpretation :
+## Client-Side Interpretation :
 
 | Observation | Meaning | Inference |
 | --- | --- | --- |
@@ -62,7 +62,7 @@ Performance counter stats for './client1':
 | close = 2 | 	Two connection closed. | 	Session ended gracefully. |
 | Overall | More writes than reads | 	Client is request-heavy; may be generating load. |
 
-### For Client2 :
+## For Client2 :
 ```bash
 sudo perf stat -e syscalls:sys_enter_read,syscalls:sys_enter_write,syscalls:sys_enter_connect,syscalls:sys_enter_close ./client2
 ```
@@ -81,7 +81,7 @@ Performance counter stats for './client2':
        0.000000000 seconds sys
 ```
 
-### Client-Side Interpretation :
+## Client-Side Interpretation :
 
 | Observation | Meaning | Inference |
 | --- | --- | --- |
@@ -91,7 +91,7 @@ Performance counter stats for './client2':
 | close = 2 | 	Two connection closed. | 	Session ended gracefully. |
 | Overall | More writes than reads | 	Client is request-heavy; may be generating load. |
 
-### Syscall Bottleneck Interpretation Summary
+## Syscall Bottleneck Interpretation Summary
 | Syscall | When Count is High | Likely System State | Possible Fix / Optimization |
 | --- | --- | --- | --- |
 | read() | Frequent small reads | I/O-bound, waiting for data | Use larger buffers, batch reads, or non-blocking I/O |
